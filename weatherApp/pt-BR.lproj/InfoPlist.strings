@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  weatherApp
+
+  Created by Marcelo Pagliarini Buligon on 12/07/20.
+  Copyright © 2020 Marcelo Pagliarini Buligon. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "Precisamos da sua localização para obter o clima atual de onde você está :)";

@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  weatherApp
+
+  Created by Marcelo Pagliarini Buligon on 08/07/20.
+  Copyright © 2020 Marcelo Pagliarini Buligon. All rights reserved.
+*/
+
+"welcomeTitle" = " 🌤 Tempo ";
+"placeholder" =  "Procure por uma cidade";
+
+"inAppTitleError" = "Erro!";
+"inAppButtonError" = "Tente Novamente";
+"inAppGenericError" = "Ops, um error aconteceu!";
+"inAppNoInternet" = "Sem conexão com a internet.";
+"inAppNoLocation" = "Ocorreu um problema quando tentamos usar sua localização.";
+

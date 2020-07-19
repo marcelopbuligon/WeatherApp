@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  weatherApp
+
+  Created by Marcelo Pagliarini Buligon on 08/07/20.
+  Copyright © 2020 Marcelo Pagliarini Buligon. All rights reserved.
+*/
+
+"welcomeTitle" = " 🌤 WeatherApp ";
+"placeholder" =  "Search for a City";
+
+"inAppTitleError" = "Error!";
+"inAppButtonError" = "Try Again";
+"inAppGenericError" = "Oops, an error happened!";
+"inAppNoInternet" = "No internet connection.";
+"inAppNoLocation" = "There was a problem when we tried to use your location.";
+
+
+

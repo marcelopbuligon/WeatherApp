@@ -8,14 +8,14 @@
 
 import UIKit
 
-struct WeatherSearch: Codable {
-    let consolidatedWeather: [WeatherModel]?
+struct WeatherSearchCityModel: Codable {
+    let consolidatedWeather: [WeatherDataModel]?
     let title: String
     let woeid: Int
     let lattLong: String
 }
 
-struct WeatherModel: Codable {
+struct WeatherDataModel: Codable {
     let weatherStateAbbr: String
     let applicableDate: Date
     let theTemp: Double
@@ -26,16 +26,12 @@ struct WeatherModel: Codable {
     let predictability: Int
 }
 
-protocol WeatherDataOutput: AnyObject {
-    func didUpdateWeather(_ weatherData: [WeatherModel])
-}
-
-protocol WeatherSearchOutput: AnyObject {
-    func didFindCities(_ citiesArray: [WeatherSearch])
-}
-
-protocol Loadable: AnyObject {
+protocol WeekdayDataServiceDelegate: AnyObject {
+    func didUpdateWeather(_ weatherData: [WeatherDataModel])
     func didFail(error:Error)
-    func showLoading()
-    func hideLoading()
+}
+
+protocol SearchServiceDelegate: AnyObject {
+    func didFindCities(_ cities: [WeatherSearchCityModel])
+    func didFail(error:Error)
 }

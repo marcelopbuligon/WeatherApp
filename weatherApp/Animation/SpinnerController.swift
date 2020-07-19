@@ -32,7 +32,7 @@ final class SpinnerController: UIViewController {
         removeFromParent()
     }
     
-    func show(addSpinner: SpinnerController ) {
+    func show() {
         view.frame = view.frame
         didMove(toParent: self)
     }

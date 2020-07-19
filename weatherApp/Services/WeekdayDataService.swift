@@ -6,36 +6,32 @@
 //  Copyright © 2020 Marcelo Pagliarini Buligon. All rights reserved.
 //
 
-final class WeekdayDataService {
-    weak var delegateData: WeatherDataOutput?
-    weak var delegateLoadable: Loadable?
-    private let apiRequester: APIRequestProtocol
+protocol WeekdayDataServiceProtocol {
+    var delegate: WeekdayDataServiceDelegate? { get set }
+    func getWeekdayWeather(woeid: Int)
+}
 
+final class WeekdayDataService: WeekdayDataServiceProtocol {
+    weak var delegate: WeekdayDataServiceDelegate?
+    private let apiRequester: APIRequestProtocol
+    
     init(apiRequester: APIRequestProtocol = APIRequest()) {
         self.apiRequester = apiRequester
     }
     
-    func getWeather(woeid: Int) {
+    func getWeekdayWeather(woeid: Int) {
         
         let urlString = "\(urlBase.metaWeather.rawValue)\(woeid)/"
         
-        delegateLoadable?.showLoading()
         apiRequester.request(
             urlString: urlString,
             method: .get,
             parameters: nil,
-            success: { [weak self] (response: WeatherSearch) in
+            success: { [weak self] (response: WeatherSearchCityModel) in
                 let weather = response.consolidatedWeather
-                self?.delegateData?.didUpdateWeather(weather ?? [])
-                self?.delegateLoadable?.hideLoading()
-                
-        }) { [delegateLoadable] (error) in
-            delegateLoadable?.didFail(error: error)
-            delegateLoadable?.hideLoading()
+                self?.delegate?.didUpdateWeather(weather ?? [])
+        }) { [weak self] (error) in
+            self?.delegate?.didFail(error: error)
         }
     }
-}
-
-enum urlBase: String {
-    case metaWeather = "https://www.metaweather.com/api/location/"
 }

@@ -19,8 +19,8 @@ enum AppError: Error {
 extension AppError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .generic: return Localizable.InAppError.generic.localized
-        case .noInternet: return Localizable.InAppError.noInternet.localized
+        case .generic: return localizable.inAppError.generic.localized
+        case .noInternet: return localizable.inAppError.noInternet.localized
         }
     }
 }

@@ -6,32 +6,31 @@
 //  Copyright © 2020 Marcelo Pagliarini Buligon. All rights reserved.
 //
 
-final class SearchCityNameService {
-    weak var delegateSearch: WeatherSearchOutput?
-    weak var delegateLoadable: Loadable?
+protocol SearchCityNameServiceProtocol {
+    var delegate: SearchServiceDelegate? { get set }
+    func citySearch(query: String)
+}
+
+final class SearchCityNameService: SearchCityNameServiceProtocol {
+    weak var delegate: SearchServiceDelegate?
     private let apiRequester: APIRequestProtocol
-    private let baseUrl = "https://www.metaweather.com/api/location/"
     
-    ///pode receber qualquer classe que implemente o protocolo APIRequestProtocol
     init(apiRequester: APIRequestProtocol = APIRequest()) {
         self.apiRequester = apiRequester
     }
     
-    func citySearch(search: String) {
+    func citySearch(query: String) {
         
-        let urlString = "\(urlBase.metaWeather.rawValue)\(search)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "\(urlBase.metaWeather.rawValue)\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
-        delegateLoadable?.showLoading()
         apiRequester.request(
             urlString: urlString,
             method: .get,
             parameters: nil,
-            success: { [weak self] (response: [WeatherSearch]) in
-                self?.delegateSearch?.didFindCities(response)
-                self?.delegateLoadable?.hideLoading()
-        }) { [delegateLoadable] (error) in
-            delegateLoadable?.didFail(error: error)
-            delegateLoadable?.hideLoading()
+            success: { [weak self] (response: [WeatherSearchCityModel]) in
+                self?.delegate?.didFindCities(response)
+        }) { [delegate] (error) in
+            delegate?.didFail(error: error)
         }
     }
 }

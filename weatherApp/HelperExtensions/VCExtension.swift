@@ -19,10 +19,7 @@ extension UIViewController {
             target: nil,
             action: nil
         )
-        
         backBarButtonItem.tintColor = .label
-
-        
         navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

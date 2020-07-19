@@ -16,12 +16,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let weatherSearchView = WeatherSearchViewController.instantiate()
-        let navigationController = UINavigationController(rootViewController: weatherSearchView)
+        let navigation = UINavigationController()
+        let searchRouter = SearchRouter(navigation: navigation)
+        navigation.viewControllers = [searchRouter.makeViewController()]
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = navigationController
+        window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
 }
